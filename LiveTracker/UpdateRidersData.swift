@@ -22,6 +22,7 @@ struct PositionedRider: Decodable {
     let Pos: Int
     let Gradient: Int
     let kphAvg: Double
+    let kmToFinish: Double
     let Course: Double
     let Latitude: Double
     let Longitude: Double

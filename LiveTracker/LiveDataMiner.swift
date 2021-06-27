@@ -9,14 +9,10 @@ import Foundation
 import Combine
 import EventSource
 
-struct TimestampedPeloton {
-    let date: Date
-    let riders: [PositionedRider]
-}
-
 final class LiveDataMiner {
     struct Config {
         static let liveStreamURL = URL(string: "https://racecenter.letour.fr/live-stream")!
+        static let secondsApartToCreateNewGroup = 5.0
     }
     
     private(set) var pelotonUpdates = PassthroughSubject<TimestampedPeloton, Never>()
@@ -60,8 +56,27 @@ final class LiveDataMiner {
             return
         }
         
+        var groups = [RaceGroup]()
+        
+        let riders = wrapper.data.Riders.sorted { $0.Pos < $1.Pos }
+        
+        var currentGroup = RaceGroup(secondsBehindLeader: 0, riders: [])
+        var previousSecToFirstRider = 0.0
+        for rider in riders {
+            if rider.secToFirstRider - previousSecToFirstRider < Config.secondsApartToCreateNewGroup {
+                currentGroup.riders.append(rider)
+            } else if currentGroup.riders.count > 0 {
+                groups.append(currentGroup)
+                currentGroup = RaceGroup(secondsBehindLeader: 0, riders: [])
+            }
+            previousSecToFirstRider = rider.secToFirstRider
+        }
+        if currentGroup.riders.count > 0 {
+            groups.append(currentGroup)
+        }
+        
         // Get date out of update message?
-        pelotonUpdates.send(TimestampedPeloton(date: Date(), riders: wrapper.data.Riders))
+        pelotonUpdates.send(TimestampedPeloton(date: Date(), groups: groups))
     }
     
     private func onComplete(statusCode: Int?, reconnect: Bool? = true, error: NSError?) {
@@ -70,4 +85,14 @@ final class LiveDataMiner {
             self?.eventSource.connect(lastEventId: nil)
         }
     }
+}
+
+struct TimestampedPeloton {
+    let date: Date
+    let groups: [RaceGroup]
+}
+
+struct RaceGroup {
+    let secondsBehindLeader: Int
+    var riders: [PositionedRider]
 }

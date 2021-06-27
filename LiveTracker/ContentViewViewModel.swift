@@ -10,7 +10,7 @@ import Combine
 
 final class ContentViewViewModel: ObservableObject {
     
-    @Published var rankedRiders = [RankedRider]()
+    @Published var rankedGroups = [RankedGroup]()
     @Published var timeAgo = ""
 
     // DI
@@ -42,18 +42,25 @@ final class ContentViewViewModel: ObservableObject {
         // Map live data to riders
         liveDataMiner.pelotonUpdates
             .map { peloton in
-                return peloton.riders.compactMap { rider -> RankedRider? in
-                    guard let fullRider = self.numberedRiders[rider.Bib] else {
-                        return nil
+                return peloton.groups.enumerated().map { index, group in
+                    let riders = group.riders.compactMap { rider -> RankedRider? in
+                        guard let fullRider = self.numberedRiders[rider.Bib] else {
+                            return nil
+                        }
+                        return RankedRider(
+                            id: rider.Bib,
+                            rider: fullRider,
+                            position: rider.Pos,
+                            secToFirstRider: rider.secToFirstRider,
+                            speed: rider.kphAvg,
+                            kmToFinish: rider.kmToFinish
+                        )
                     }
-                    let rankedRider = RankedRider(id: rider.Bib, rider: fullRider, position: rider.Pos, secToFirstRider: rider.secToFirstRider)
-                    return rankedRider
+                    
+                    return RankedGroup(id: index, riders: riders)
                 }
             }
-            .map {
-                $0.sorted { $0.position < $1.position }
-            }
-            .assign(to: \.rankedRiders, on: self)
+            .assign(to: \.rankedGroups, on: self)
             .store(in: &subscriptions)
         
         // Store last update time
@@ -98,12 +105,19 @@ final class ContentViewViewModel: ObservableObject {
     }
 }
 
+struct RankedGroup: Identifiable {
+    let id: Int
+    let riders: [RankedRider]
+}
+
 struct RankedRider: Identifiable {
     let id: Int
     let rider: FullRider
 
     var position: Int = -1
     var secToFirstRider: TimeInterval = 0
+    var speed = 0.0
+    var kmToFinish = 0.0
 }
 
 let decoder: JSONDecoder = {

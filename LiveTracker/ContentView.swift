@@ -13,20 +13,65 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text(viewModel.timeAgo)
-            List(viewModel.rankedRiders) { rank in
-                HStack {
-                    Text("\(rank.position)")
-                    Text("\(rank.rider.bib!)")
-                    Text(rank.rider.name)
-                    Spacer()
-                    Text("\(Int(rank.secToFirstRider))")
+            if let firstRider = viewModel.rankedGroups.first?.riders.first {
+                Text(String(format: "Finish %.2fkm", firstRider.kmToFinish))
+            }
+            List {
+                ForEach(viewModel.rankedGroups) { group in
+                    Section {
+                        DisclosureGroup {
+                            ForEach(group.riders) { rank in
+                                HStack {
+                                    Text("\(rank.position)")
+                                        .font(.footnote)
+                                    Text(rank.rider.name)
+                                    Text("\(rank.rider.bib!)")
+                                        .font(.footnote)
+                                }
+                            }
+                        } label: {
+                            HStack(spacing: 2) {
+                                Group {
+                                    if group.riders.count == 1 {
+                                        Image(systemName: "person")
+                                    } else {
+                                        Image(systemName: "person.2")
+                                        Text("\(group.riders.count)")
+                                            .font(.footnote)
+                                    }
+                                }.frame(width: 40)
+
+                                Text("\(String(format: "%.1f", group.riders.first!.speed)) km/h")
+                                    .font(.footnote)
+                                    .padding(.leading, 10)
+
+                                Spacer()
+
+                                if group.riders.first!.secToFirstRider == 0 {
+                                    Text("")
+                                } else {
+                                    Text("+\(group.riders.first!.secToFirstRider.stringTime)")
+                                }
+                            }
+                        }
+                    }
                 }
             }
+            HStack {
+                Spacer()
+                Text(viewModel.timeAgo)
+                    .font(.footnote)
+            }
+            .padding()
         }
         .onAppear {
             viewModel.start()
         }
+    }
+    
+    private func gapToLeaderInMeters(rider: RankedRider) -> Int {
+        let leaderDistance = viewModel.rankedGroups.first?.riders.first?.kmToFinish ?? 0
+        return Int((rider.kmToFinish - leaderDistance) * 1000.0)
     }
 }
 
