@@ -16,6 +16,13 @@ struct FullRider: Decodable, Identifiable {
     let firstname: String?
     let lastnameshort: String?
     let bib: Int?
+    let teamID: String?
+    var team: Team? {
+        get {
+            guard let id = teamID else { return nil }
+            return Team.teams.first { id.contains($0.id)}
+        }
+    }
         
     enum CodingKeys: String, CodingKey {
         case id = "_id"
@@ -24,6 +31,7 @@ struct FullRider: Decodable, Identifiable {
         case firstname
         case lastnameshort
         case bib
+        case teamID = "$team"
     }
     
     var name: String {

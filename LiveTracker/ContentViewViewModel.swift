@@ -50,10 +50,7 @@ final class ContentViewViewModel: ObservableObject {
                         return RankedRider(
                             id: rider.Bib,
                             rider: fullRider,
-                            position: rider.Pos,
-                            secToFirstRider: rider.secToFirstRider,
-                            speed: rider.kphAvg,
-                            kmToFinish: rider.kmToFinish
+                            position: rider
                         )
                     }
                     
@@ -78,7 +75,6 @@ final class ContentViewViewModel: ObservableObject {
     }
 
     struct Config {
-        static let liveStreamURL = URL(string: "https://racecenter.letour.fr/live-stream")!
         static let ridersDataURL = URL(string: "https://racecenter.letour.fr/api/allCompetitors-2021")!
     }
     
@@ -113,11 +109,7 @@ struct RankedGroup: Identifiable {
 struct RankedRider: Identifiable {
     let id: Int
     let rider: FullRider
-
-    var position: Int = -1
-    var secToFirstRider: TimeInterval = 0
-    var speed = 0.0
-    var kmToFinish = 0.0
+    let position: PositionedRider
 }
 
 let decoder: JSONDecoder = {

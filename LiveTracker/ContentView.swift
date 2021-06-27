@@ -14,20 +14,14 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if let firstRider = viewModel.rankedGroups.first?.riders.first {
-                Text(String(format: "Finish %.2fkm", firstRider.kmToFinish))
+                Text(String(format: "Finish %.2fkm", firstRider.position.kmToFinish))
             }
             List {
                 ForEach(viewModel.rankedGroups) { group in
                     Section {
                         DisclosureGroup {
                             ForEach(group.riders) { rank in
-                                HStack {
-                                    Text("\(rank.position)")
-                                        .font(.footnote)
-                                    Text(rank.rider.name)
-                                    Text("\(rank.rider.bib!)")
-                                        .font(.footnote)
-                                }
+                                RiderCell(rank: rank)
                             }
                         } label: {
                             HStack(spacing: 2) {
@@ -41,16 +35,16 @@ struct ContentView: View {
                                     }
                                 }.frame(width: 40)
 
-                                Text("\(String(format: "%.1f", group.riders.first!.speed)) km/h")
+                                Text("\(String(format: "%.1f", group.riders.first!.position.kph)) km/h")
                                     .font(.footnote)
                                     .padding(.leading, 10)
 
                                 Spacer()
 
-                                if group.riders.first!.secToFirstRider == 0 {
+                                if group.riders.first!.position.secToFirstRider == 0 {
                                     Text("")
                                 } else {
-                                    Text("+\(group.riders.first!.secToFirstRider.stringTime)")
+                                    Text("+\(group.riders.first!.position.secToFirstRider.stringTime)")
                                 }
                             }
                         }
@@ -70,8 +64,8 @@ struct ContentView: View {
     }
     
     private func gapToLeaderInMeters(rider: RankedRider) -> Int {
-        let leaderDistance = viewModel.rankedGroups.first?.riders.first?.kmToFinish ?? 0
-        return Int((rider.kmToFinish - leaderDistance) * 1000.0)
+        let leaderDistance = viewModel.rankedGroups.first?.riders.first?.position.kmToFinish ?? 0
+        return Int((rider.position.kmToFinish - leaderDistance) * 1000.0)
     }
 }
 

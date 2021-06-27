@@ -21,6 +21,7 @@ struct PositionedRider: Decodable {
     let secToFirstRider: TimeInterval
     let Pos: Int
     let Gradient: Int
+    let kph: Double
     let kphAvg: Double
     let kmToFinish: Double
     let Course: Double

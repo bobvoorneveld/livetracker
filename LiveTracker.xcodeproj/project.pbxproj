@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8D268884C900372395 /* LiveDataMiner.swift */; };
 		C47C1F9026888EE500372395 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8F26888EE500372395 /* TimeInterval.swift */; };
+		C47C1F942688A5C600372395 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F932688A5C600372395 /* Team.swift */; };
+		C47C1F962688AB3500372395 /* URLImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F952688AB3500372395 /* URLImageView.swift */; };
+		C47C1F982688AB5500372395 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F972688AB5500372395 /* ImageCache.swift */; };
+		C47C1F9A2688ACBF00372395 /* RiderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F992688ACBF00372395 /* RiderCell.swift */; };
 		C4E23D8226874D4C00978B74 /* LiveTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E23D8126874D4C00978B74 /* LiveTrackerApp.swift */; };
 		C4E23D8426874D4C00978B74 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E23D8326874D4C00978B74 /* ContentView.swift */; };
 		C4E23D8626874D4D00978B74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4E23D8526874D4D00978B74 /* Assets.xcassets */; };
@@ -43,6 +47,10 @@
 /* Begin PBXFileReference section */
 		C47C1F8D268884C900372395 /* LiveDataMiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDataMiner.swift; sourceTree = "<group>"; };
 		C47C1F8F26888EE500372395 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		C47C1F932688A5C600372395 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		C47C1F952688AB3500372395 /* URLImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImageView.swift; sourceTree = "<group>"; };
+		C47C1F972688AB5500372395 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		C47C1F992688ACBF00372395 /* RiderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderCell.swift; sourceTree = "<group>"; };
 		C4E23D7E26874D4C00978B74 /* LiveTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E23D8126874D4C00978B74 /* LiveTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTrackerApp.swift; sourceTree = "<group>"; };
 		C4E23D8326874D4C00978B74 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +131,10 @@
 				C4E23DB82687540800978B74 /* FullRider.swift */,
 				C47C1F8D268884C900372395 /* LiveDataMiner.swift */,
 				C47C1F8F26888EE500372395 /* TimeInterval.swift */,
+				C47C1F932688A5C600372395 /* Team.swift */,
+				C47C1F952688AB3500372395 /* URLImageView.swift */,
+				C47C1F972688AB5500372395 /* ImageCache.swift */,
+				C47C1F992688ACBF00372395 /* RiderCell.swift */,
 			);
 			path = LiveTracker;
 			sourceTree = "<group>";
@@ -292,10 +304,14 @@
 				C47C1F9026888EE500372395 /* TimeInterval.swift in Sources */,
 				C4E23DB72687503400978B74 /* UpdateRidersData.swift in Sources */,
 				C4E23D8B26874D4D00978B74 /* Persistence.swift in Sources */,
+				C47C1F962688AB3500372395 /* URLImageView.swift in Sources */,
 				C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */,
+				C47C1F982688AB5500372395 /* ImageCache.swift in Sources */,
 				C4E23D8426874D4C00978B74 /* ContentView.swift in Sources */,
 				C4E23D8226874D4C00978B74 /* LiveTrackerApp.swift in Sources */,
 				C4E23DB226874D6000978B74 /* ContentViewViewModel.swift in Sources */,
+				C47C1F942688A5C600372395 /* Team.swift in Sources */,
+				C47C1F9A2688ACBF00372395 /* RiderCell.swift in Sources */,
 				C4E23DB92687540800978B74 /* FullRider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
