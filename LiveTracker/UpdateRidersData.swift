@@ -14,10 +14,10 @@ struct UpdateRidersDataWrapper: Decodable {
 
 
 struct UpdateRidersData: Decodable {
-    let Riders: [Rider]
+    let Riders: [PositionedRider]
 }
 
-struct Rider: Decodable {
+struct PositionedRider: Decodable {
     let secToFirstRider: TimeInterval
     let Pos: Int
     let Gradient: Int

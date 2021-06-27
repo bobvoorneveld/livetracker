@@ -13,13 +13,6 @@ final class ContentViewViewModel: ObservableObject {
     
     var eventSource: EventSource!
     
-    @Published var riders = [Int: FullRider]() {
-        didSet {
-            if oldValue.isEmpty && !riders.isEmpty {
-                eventSource.connect()
-            }
-        }
-    }
     @Published var rankedRiders = [RankedRider]()
     @Published var lastUpdate: Date? {
         didSet {
@@ -28,6 +21,16 @@ final class ContentViewViewModel: ObservableObject {
     }
     @Published var timeAgo = ""
     
+    private let liveDataMiner = LiveDataMiner()
+
+    private var numberedRiders = [Int: FullRider]() {
+        didSet {
+            if oldValue.isEmpty && !numberedRiders.isEmpty {
+                liveDataMiner.start()
+            }
+        }
+    }
+
     private var subscriptions = Set<AnyCancellable>()
     
     private let timer = Timer.publish(
@@ -36,6 +39,40 @@ final class ContentViewViewModel: ObservableObject {
             in: .common
         ).autoconnect()
 
+    
+    init() {
+        // Map live data to riders
+        liveDataMiner.pelotonUpdates
+            .map { peloton in
+                return peloton.riders.compactMap { rider -> RankedRider? in
+                    guard let fullRider = self.numberedRiders[rider.Bib] else {
+                        return nil
+                    }
+                    let rankedRider = RankedRider(id: rider.Bib, rider: fullRider, position: rider.Pos, secToFirstRider: rider.secToFirstRider)
+                    return rankedRider
+                }
+            }
+            .map {
+                $0.sorted { $0.position < $1.position }
+            }
+            .assign(to: \.rankedRiders, on: self)
+            .store(in: &subscriptions)
+        
+        // Store last update time
+        liveDataMiner.pelotonUpdates
+            .compactMap { $0.date }
+            .assign(to: \.lastUpdate, on: self)
+            .store(in: &subscriptions)
+        
+        // Update lastUpdate time every second
+        timer.combineLatest($lastUpdate)
+            .map(\.1)
+            .map { lastUpdate in
+                guard let lastUpdate = lastUpdate else { return "Offline" }
+                return Date().timeIntervalSince(lastUpdate).stringTime
+        }.assign(to: \.timeAgo, on: self)
+        .store(in: &subscriptions)
+    }
 
     struct Config {
         static let liveStreamURL = URL(string: "https://racecenter.letour.fr/live-stream")!
@@ -43,6 +80,7 @@ final class ContentViewViewModel: ObservableObject {
     }
     
     private func loadRiders() {
+        print("loading riders")
         URLSession.shared.dataTaskPublisher(for: Config.ridersDataURL)
             .map(\.data)
             .decode(type: [FullRider].self, decoder: decoder)
@@ -54,59 +92,13 @@ final class ContentViewViewModel: ObservableObject {
                 }
             }
             .receive(on: DispatchQueue.main)
-            .assign(to: \.riders, on: self)
+            .assign(to: \.numberedRiders, on: self)
             .store(in: &subscriptions)
-        
-        timer.map { _ in
-            guard let lastUpdate = self.lastUpdate else { return self.timeAgo }
-            let formatter = RelativeDateTimeFormatter()
-            formatter.unitsStyle = .full
-
-            return formatter.localizedString(for: lastUpdate, relativeTo: Date())
-        }.assign(to: \.timeAgo, on: self)
-        .store(in: &subscriptions)
     }
 
     func start() {
         print("starting")
         loadRiders()
-        eventSource = EventSource(url: Config.liveStreamURL)
-        eventSource.onOpen {
-            print("open")
-        }
-        
-        eventSource.addEventListener("update") { id, event, data in
-            guard let data = data, data.contains("\"bind\":\"telemetryCompetitor-2021\"") else {
-                return
-            }
-            
-            guard let wrapper = try? JSONDecoder().decode(UpdateRidersDataWrapper.self, from: data.data(using: .utf8)!) else {
-                return
-            }
-            
-            let updatedRiders = wrapper.data.Riders
-            
-            var rankedRiders: [RankedRider] = updatedRiders.compactMap { rider in
-                guard let fullRider = self.riders[rider.Bib] else {
-                    return nil
-                }
-                let rankedRider = RankedRider(id: rider.Bib, rider: fullRider, position: rider.Pos, secToFirstRider: rider.secToFirstRider)
-                return rankedRider
-            }
-            
-            rankedRiders.sort { $0.position < $1.position }
-            self.rankedRiders = rankedRiders
-            self.lastUpdate = Date()
-        }
-        
-        eventSource.onComplete { [weak self] statusCode, reconnect, error in
-
-            let retryTime = self?.eventSource?.retryTime ?? 3000
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(retryTime)) { [weak self] in
-                print("reconnect")
-                self?.eventSource?.connect()
-            }
-        }
     }
 }
 
