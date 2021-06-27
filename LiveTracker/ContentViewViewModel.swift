@@ -7,20 +7,13 @@
 
 import Foundation
 import Combine
-import EventSource
 
 final class ContentViewViewModel: ObservableObject {
     
-    var eventSource: EventSource!
-    
     @Published var rankedRiders = [RankedRider]()
-    @Published var lastUpdate: Date? {
-        didSet {
-            timeAgo = "Nu"
-        }
-    }
     @Published var timeAgo = ""
-    
+
+    // DI
     private let liveDataMiner = LiveDataMiner()
 
     private var numberedRiders = [Int: FullRider]() {
@@ -28,6 +21,11 @@ final class ContentViewViewModel: ObservableObject {
             if oldValue.isEmpty && !numberedRiders.isEmpty {
                 liveDataMiner.start()
             }
+        }
+    }
+    private var lastUpdate: Date? {
+        didSet {
+            timeAgo = "Nu"
         }
     }
 
@@ -65,10 +63,8 @@ final class ContentViewViewModel: ObservableObject {
             .store(in: &subscriptions)
         
         // Update lastUpdate time every second
-        timer.combineLatest($lastUpdate)
-            .map(\.1)
-            .map { lastUpdate in
-                guard let lastUpdate = lastUpdate else { return "Offline" }
+        timer.map { [unowned self] _ in
+            guard let lastUpdate = self.lastUpdate else { return "Offline" }
                 return Date().timeIntervalSince(lastUpdate).stringTime
         }.assign(to: \.timeAgo, on: self)
         .store(in: &subscriptions)
