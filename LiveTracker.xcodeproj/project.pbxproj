@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,10 @@
 		C4E23D8E26874D4D00978B74 /* LiveTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C4E23D8C26874D4D00978B74 /* LiveTracker.xcdatamodeld */; };
 		C4E23D9926874D4E00978B74 /* LiveTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E23D9826874D4E00978B74 /* LiveTrackerTests.swift */; };
 		C4E23DA426874D4E00978B74 /* LiveTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E23DA326874D4E00978B74 /* LiveTrackerUITests.swift */; };
+		C4E23DB226874D6000978B74 /* ContentViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E23DB126874D6000978B74 /* ContentViewViewModel.swift */; };
+		C4E23DB526874D8100978B74 /* EventSource in Frameworks */ = {isa = PBXBuildFile; productRef = C4E23DB426874D8100978B74 /* EventSource */; };
+		C4E23DB72687503400978B74 /* UpdateRidersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E23DB62687503400978B74 /* UpdateRidersData.swift */; };
+		C4E23DB92687540800978B74 /* FullRider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E23DB82687540800978B74 /* FullRider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +53,9 @@
 		C4E23D9F26874D4E00978B74 /* LiveTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E23DA326874D4E00978B74 /* LiveTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveTrackerUITests.swift; sourceTree = "<group>"; };
 		C4E23DA526874D4E00978B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4E23DB126874D6000978B74 /* ContentViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewViewModel.swift; sourceTree = "<group>"; };
+		C4E23DB62687503400978B74 /* UpdateRidersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRidersData.swift; sourceTree = "<group>"; };
+		C4E23DB82687540800978B74 /* FullRider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullRider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4E23DB526874D8100978B74 /* EventSource in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +114,9 @@
 				C4E23D8F26874D4D00978B74 /* Info.plist */,
 				C4E23D8C26874D4D00978B74 /* LiveTracker.xcdatamodeld */,
 				C4E23D8726874D4D00978B74 /* Preview Content */,
+				C4E23DB126874D6000978B74 /* ContentViewViewModel.swift */,
+				C4E23DB62687503400978B74 /* UpdateRidersData.swift */,
+				C4E23DB82687540800978B74 /* FullRider.swift */,
 			);
 			path = LiveTracker;
 			sourceTree = "<group>";
@@ -152,6 +163,9 @@
 			dependencies = (
 			);
 			name = LiveTracker;
+			packageProductDependencies = (
+				C4E23DB426874D8100978B74 /* EventSource */,
+			);
 			productName = LiveTracker;
 			productReference = C4E23D7E26874D4C00978B74 /* LiveTracker.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +237,9 @@
 				Base,
 			);
 			mainGroup = C4E23D7526874D4C00978B74;
+			packageReferences = (
+				C4E23DB326874D8100978B74 /* XCRemoteSwiftPackageReference "EventSource" */,
+			);
 			productRefGroup = C4E23D7F26874D4C00978B74 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,9 +283,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4E23D8E26874D4D00978B74 /* LiveTracker.xcdatamodeld in Sources */,
+				C4E23DB72687503400978B74 /* UpdateRidersData.swift in Sources */,
 				C4E23D8B26874D4D00978B74 /* Persistence.swift in Sources */,
 				C4E23D8426874D4C00978B74 /* ContentView.swift in Sources */,
 				C4E23D8226874D4C00978B74 /* LiveTrackerApp.swift in Sources */,
+				C4E23DB226874D6000978B74 /* ContentViewViewModel.swift in Sources */,
+				C4E23DB92687540800978B74 /* FullRider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +608,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C4E23DB326874D8100978B74 /* XCRemoteSwiftPackageReference "EventSource" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/inaka/EventSource.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C4E23DB426874D8100978B74 /* EventSource */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4E23DB326874D8100978B74 /* XCRemoteSwiftPackageReference "EventSource" */;
+			productName = EventSource;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		C4E23D8C26874D4D00978B74 /* LiveTracker.xcdatamodeld */ = {
