@@ -12,6 +12,7 @@ final class ContentViewViewModel: ObservableObject {
     
     @Published var rankedGroups = [RankedGroup]()
     @Published var timeAgo = ""
+    @Published var showStarred = false
 
     // DI
     private let liveDataMiner = LiveDataMiner()
@@ -82,7 +83,7 @@ final class ContentViewViewModel: ObservableObject {
         print("loading riders")
         URLSession.shared.dataTaskPublisher(for: Config.ridersDataURL)
             .map(\.data)
-            .decode(type: [FullRider].self, decoder: decoder)
+            .decode(type: [FullRider].self, decoder: JSONDecoder.iso8601)
             .replaceError(with: [])
             .map { $0.filter { $0.bib != nil } }
             .map { riders in
@@ -101,19 +102,10 @@ final class ContentViewViewModel: ObservableObject {
     }
 }
 
-struct RankedGroup: Identifiable {
-    let id: Int
-    let riders: [RankedRider]
+extension JSONDecoder {
+    static var iso8601: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return decoder
+    }()
 }
-
-struct RankedRider: Identifiable {
-    let id: Int
-    let rider: FullRider
-    let position: PositionedRider
-}
-
-let decoder: JSONDecoder = {
-    let decoder = JSONDecoder()
-    decoder.dateDecodingStrategy = .iso8601
-    return decoder
-}()

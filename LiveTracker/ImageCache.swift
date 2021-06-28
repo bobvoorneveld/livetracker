@@ -10,6 +10,8 @@ import SwiftUI
 class ImageCache {
     var cache = NSCache<NSString, UIImage>()
     
+    private init() {}
+
     func get(forKey: String) -> UIImage? {
         return cache.object(forKey: NSString(string: forKey))
     }
@@ -20,8 +22,5 @@ class ImageCache {
 }
 
 extension ImageCache {
-    private static var imageCache = ImageCache()
-    static func getImageCache() -> ImageCache {
-        return imageCache
-    }
+    static let shared = ImageCache()
 }

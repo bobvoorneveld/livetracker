@@ -21,7 +21,9 @@ struct ContentView: View {
                     Section {
                         DisclosureGroup {
                             ForEach(group.riders) { rank in
-                                RiderCell(rank: rank)
+                                if StarredBibs.shared.savedBibs.contains(rank.rider.bib!) || !viewModel.showStarred {
+                                    RiderCell(rank: rank)
+                                }
                             }
                         } label: {
                             HStack(spacing: 2) {
@@ -52,7 +54,10 @@ struct ContentView: View {
                 }
             }
             HStack {
-                Spacer()
+                Toggle(isOn: $viewModel.showStarred) {
+                    Image(systemName:"star.fill")
+                        .foregroundColor(.yellow)
+                }
                 Text(viewModel.timeAgo)
                     .font(.footnote)
             }
