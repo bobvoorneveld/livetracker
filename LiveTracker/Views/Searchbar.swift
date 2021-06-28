@@ -50,12 +50,6 @@ struct SearchBar: View {
     }
 }
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
 //struct Searchbar_Previews: PreviewProvider {
 //    @State var searchText: String = ""
 //    static var previews: some View {

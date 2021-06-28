@@ -14,6 +14,7 @@
 		C411D86C2689EEFB00734717 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D86B2689EEFB00734717 /* JSONDecoder.swift */; };
 		C411D86E2689F27600734717 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D86D2689F27600734717 /* MainTabView.swift */; };
 		C411D8702689F43200734717 /* Searchbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D86F2689F43200734717 /* Searchbar.swift */; };
+		C411D873268A175000734717 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D872268A175000734717 /* UIApplication.swift */; };
 		C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8D268884C900372395 /* LiveDataMiner.swift */; };
 		C47C1F9026888EE500372395 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8F26888EE500372395 /* TimeInterval.swift */; };
 		C47C1F942688A5C600372395 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F932688A5C600372395 /* Team.swift */; };
@@ -57,6 +58,7 @@
 		C411D86B2689EEFB00734717 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		C411D86D2689F27600734717 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		C411D86F2689F43200734717 /* Searchbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searchbar.swift; sourceTree = "<group>"; };
+		C411D872268A175000734717 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		C47C1F8D268884C900372395 /* LiveDataMiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDataMiner.swift; sourceTree = "<group>"; };
 		C47C1F8F26888EE500372395 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		C47C1F932688A5C600372395 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -122,8 +124,18 @@
 			isa = PBXGroup;
 			children = (
 				C411D86B2689EEFB00734717 /* JSONDecoder.swift */,
+				C47C1F8F26888EE500372395 /* TimeInterval.swift */,
+				C411D872268A175000734717 /* UIApplication.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C411D871268A171D00734717 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				C4E23D8A26874D4D00978B74 /* Persistence.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		C47C1F9B2688CFE400372395 /* Models */ = {
@@ -132,6 +144,11 @@
 				C47C1F9C2688CFF100372395 /* StarredRiders.swift */,
 				C411D85F2689EA0100734717 /* RankedRider.swift */,
 				C411D8612689EA1600734717 /* RankedGroup.swift */,
+				C47C1F8D268884C900372395 /* LiveDataMiner.swift */,
+				C47C1F972688AB5500372395 /* ImageCache.swift */,
+				C47C1F932688A5C600372395 /* Team.swift */,
+				C4E23DB82687540800978B74 /* FullRider.swift */,
+				C4E23DB62687503400978B74 /* UpdateRidersData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -159,21 +176,15 @@
 		C4E23D8026874D4C00978B74 /* LiveTracker */ = {
 			isa = PBXGroup;
 			children = (
+				C411D871268A171D00734717 /* CoreData */,
 				C411D86A2689EEEF00734717 /* Helpers */,
 				C411D8652689EDD700734717 /* Views */,
 				C47C1F9B2688CFE400372395 /* Models */,
 				C4E23D8126874D4C00978B74 /* LiveTrackerApp.swift */,
 				C4E23D8526874D4D00978B74 /* Assets.xcassets */,
-				C4E23D8A26874D4D00978B74 /* Persistence.swift */,
 				C4E23D8F26874D4D00978B74 /* Info.plist */,
 				C4E23D8C26874D4D00978B74 /* LiveTracker.xcdatamodeld */,
 				C4E23D8726874D4D00978B74 /* Preview Content */,
-				C4E23DB62687503400978B74 /* UpdateRidersData.swift */,
-				C4E23DB82687540800978B74 /* FullRider.swift */,
-				C47C1F8D268884C900372395 /* LiveDataMiner.swift */,
-				C47C1F8F26888EE500372395 /* TimeInterval.swift */,
-				C47C1F932688A5C600372395 /* Team.swift */,
-				C47C1F972688AB5500372395 /* ImageCache.swift */,
 			);
 			path = LiveTracker;
 			sourceTree = "<group>";
@@ -347,6 +358,7 @@
 				C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */,
 				C47C1F9D2688CFF100372395 /* StarredRiders.swift in Sources */,
 				C411D8642689ED9800734717 /* SectionedListView.swift in Sources */,
+				C411D873268A175000734717 /* UIApplication.swift in Sources */,
 				C47C1F982688AB5500372395 /* ImageCache.swift in Sources */,
 				C411D8672689EE7F00734717 /* SectionedListViewModel.swift in Sources */,
 				C4E23D8226874D4C00978B74 /* LiveTrackerApp.swift in Sources */,
