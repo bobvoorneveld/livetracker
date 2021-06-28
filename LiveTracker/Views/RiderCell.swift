@@ -72,7 +72,11 @@ private final class RiderCellViewModel: ObservableObject {
     }
     
     func toggleStar() {
-        StarredBibs.shared.add(bib: rank.rider.bib!)
+        if isStarred {
+            StarredBibs.shared.remove(bib: rank.rider.bib!)
+        } else {
+            StarredBibs.shared.add(bib: rank.rider.bib!)
+        }
         isStarred =  StarredBibs.shared.savedBibs.contains(rank.rider.bib!)
     }
     

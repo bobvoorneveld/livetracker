@@ -10,4 +10,7 @@ import Foundation
 struct RankedGroup: Identifiable {
     let id: Int
     let riders: [RankedRider]
+    let size: Int
+    let speed: Double
+    let secToFirstRider: TimeInterval
 }
