@@ -14,6 +14,10 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Peloton", systemImage: "bicycle.circle")
                 }
+            RankView()
+                .tabItem {
+                    Label("Ranking", systemImage: "person.3")
+                }
         }
     }
 }

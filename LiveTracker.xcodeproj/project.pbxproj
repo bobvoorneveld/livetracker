@@ -18,6 +18,8 @@
 		C411D875268A453200734717 /* RiderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D874268A453200734717 /* RiderStore.swift */; };
 		C411D877268AF8DA00734717 /* RaceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D876268AF8DA00734717 /* RaceGroup.swift */; };
 		C411D879268AF8F900734717 /* TimestampedPeloton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D878268AF8F900734717 /* TimestampedPeloton.swift */; };
+		C411D87B268B580C00734717 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D87A268B580C00734717 /* RankView.swift */; };
+		C411D87D268B581B00734717 /* RankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D87C268B581B00734717 /* RankViewModel.swift */; };
 		C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8D268884C900372395 /* LiveDataMiner.swift */; };
 		C47C1F9026888EE500372395 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8F26888EE500372395 /* TimeInterval.swift */; };
 		C47C1F942688A5C600372395 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F932688A5C600372395 /* Team.swift */; };
@@ -65,6 +67,8 @@
 		C411D874268A453200734717 /* RiderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderStore.swift; sourceTree = "<group>"; };
 		C411D876268AF8DA00734717 /* RaceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceGroup.swift; sourceTree = "<group>"; };
 		C411D878268AF8F900734717 /* TimestampedPeloton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampedPeloton.swift; sourceTree = "<group>"; };
+		C411D87A268B580C00734717 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
+		C411D87C268B581B00734717 /* RankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewModel.swift; sourceTree = "<group>"; };
 		C47C1F8D268884C900372395 /* LiveDataMiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDataMiner.swift; sourceTree = "<group>"; };
 		C47C1F8F26888EE500372395 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		C47C1F932688A5C600372395 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				C411D86D2689F27600734717 /* MainTabView.swift */,
 				C411D86F2689F43200734717 /* Searchbar.swift */,
 				C47C1F992688ACBF00372395 /* RiderCell.swift */,
+				C411D87A268B580C00734717 /* RankView.swift */,
+				C411D87C268B581B00734717 /* RankViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -365,6 +371,7 @@
 				C4E23DB72687503400978B74 /* UpdateRidersData.swift in Sources */,
 				C4E23D8B26874D4D00978B74 /* Persistence.swift in Sources */,
 				C411D877268AF8DA00734717 /* RaceGroup.swift in Sources */,
+				C411D87B268B580C00734717 /* RankView.swift in Sources */,
 				C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */,
 				C411D879268AF8F900734717 /* TimestampedPeloton.swift in Sources */,
 				C47C1F9D2688CFF100372395 /* StarredRiders.swift in Sources */,
@@ -380,6 +387,7 @@
 				C411D8622689EA1600734717 /* RankedGroup.swift in Sources */,
 				C411D8702689F43200734717 /* Searchbar.swift in Sources */,
 				C4E23DB92687540800978B74 /* FullRider.swift in Sources */,
+				C411D87D268B581B00734717 /* RankViewModel.swift in Sources */,
 				C411D86E2689F27600734717 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
