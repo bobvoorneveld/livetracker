@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 final class SectionedListViewModel: ObservableObject {
+    
     @Published var rankedGroups = [RankedGroup]()
     @Published var showStarred = false {
         didSet {
@@ -35,55 +36,19 @@ final class SectionedListViewModel: ObservableObject {
     private var storedOpenSections = Array<Bool>.init(repeating: false, count: 200)
 
     // DI
-    private let liveDataMiner = LiveDataMiner()
-
-    private var numberedRiders = [Int: FullRider]() {
-        didSet {
-            if oldValue.isEmpty && !numberedRiders.isEmpty {
-                liveDataMiner.start()
-            }
-        }
-    }
 
     private var subscriptions = Set<AnyCancellable>()
     
     init() {
-        // Map live data to riders
-        liveDataMiner.pelotonUpdates
-            .map { [unowned self] peloton in
-                return peloton.groups.enumerated().map { index, group in
-                    let riders = group.riders.compactMap { rider -> RankedRider? in
-                        guard let fullRider = self.numberedRiders[rider.Bib] else {
-                            return nil
-                        }
-                        return RankedRider(
-                            id: rider.Bib,
-                            rider: fullRider,
-                            position: rider
-                        )
-                    }
-                    
-                    return RankedGroup(id: index,
-                                       riders: riders,
-                                       size: group.riders.count,
-                                       speed: group.riders.first!.kph,
-                                       secToFirstRider: group.riders.first!.secToFirstRider
-                                       )
-                }
-            }
-            .assign(to: \.rankedGroups, on: self)
-            .store(in: &subscriptions)
-        
-        
-        liveDataMiner.pelotonUpdates
-            .compactMap { $0.groups.first?.riders.first }
-            .map { "Finish \($0.kmToFinish) km" }
+        RiderStore.shared.$pelotonUpdates
+            .compactMap { $0.first?.riders.first?.position }
+            .map { "\($0.kmToFinish) km" }
             .assign(to: \.title, on: self)
             .store(in: &subscriptions)
-    }
 
-    struct Config {
-        static let ridersDataURL = URL(string: "https://racecenter.letour.fr/api/allCompetitors-2021")!
+        RiderStore.shared.$pelotonUpdates
+            .assign(to: \.rankedGroups, on: self)
+            .store(in: &subscriptions)
     }
     
     func include(rank: RankedRider) -> Bool {
@@ -102,26 +67,9 @@ final class SectionedListViewModel: ObservableObject {
         }
         return false
     }
-    
-    private func loadRiders() {
-        print("loading riders")
-        URLSession.shared.dataTaskPublisher(for: Config.ridersDataURL)
-            .map(\.data)
-            .decode(type: [FullRider].self, decoder: JSONDecoder.iso8601)
-            .replaceError(with: [])
-            .map { $0.filter { $0.bib != nil } }
-            .map { riders in
-                return riders.reduce(into: [Int: FullRider]()) { dict, rider in
-                    dict[rider.bib ?? -1] = rider
-                }
-            }
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.numberedRiders, on: self)
-            .store(in: &subscriptions)
-    }
 
     func start() {
         print("starting")
-        loadRiders()
+        RiderStore.shared.startMonitoring()
     }
 }

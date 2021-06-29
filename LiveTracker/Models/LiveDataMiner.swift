@@ -10,9 +10,10 @@ import Combine
 import EventSource
 
 final class LiveDataMiner {
-    struct Config {
+    private struct Config {
         static let liveStreamURL = URL(string: "https://racecenter.letour.fr/live-stream")!
         static let secondsApartToCreateNewGroup = 5.0
+        static let retryTime = 1000
     }
     
     private(set) var pelotonUpdates = PassthroughSubject<TimestampedPeloton, Never>()
@@ -81,18 +82,8 @@ final class LiveDataMiner {
     
     private func onComplete(statusCode: Int?, reconnect: Bool? = true, error: NSError?) {
         guard self.reconnect else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(eventSource.retryTime)) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Config.retryTime)) { [weak self] in
             self?.eventSource.connect(lastEventId: nil)
         }
     }
-}
-
-struct TimestampedPeloton {
-    let date: Date
-    let groups: [RaceGroup]
-}
-
-struct RaceGroup {
-    let secondsBehindLeader: Int
-    var riders: [PositionedRider]
 }

@@ -15,6 +15,9 @@
 		C411D86E2689F27600734717 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D86D2689F27600734717 /* MainTabView.swift */; };
 		C411D8702689F43200734717 /* Searchbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D86F2689F43200734717 /* Searchbar.swift */; };
 		C411D873268A175000734717 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D872268A175000734717 /* UIApplication.swift */; };
+		C411D875268A453200734717 /* RiderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D874268A453200734717 /* RiderStore.swift */; };
+		C411D877268AF8DA00734717 /* RaceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D876268AF8DA00734717 /* RaceGroup.swift */; };
+		C411D879268AF8F900734717 /* TimestampedPeloton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C411D878268AF8F900734717 /* TimestampedPeloton.swift */; };
 		C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8D268884C900372395 /* LiveDataMiner.swift */; };
 		C47C1F9026888EE500372395 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F8F26888EE500372395 /* TimeInterval.swift */; };
 		C47C1F942688A5C600372395 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47C1F932688A5C600372395 /* Team.swift */; };
@@ -59,6 +62,9 @@
 		C411D86D2689F27600734717 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		C411D86F2689F43200734717 /* Searchbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Searchbar.swift; sourceTree = "<group>"; };
 		C411D872268A175000734717 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		C411D874268A453200734717 /* RiderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiderStore.swift; sourceTree = "<group>"; };
+		C411D876268AF8DA00734717 /* RaceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceGroup.swift; sourceTree = "<group>"; };
+		C411D878268AF8F900734717 /* TimestampedPeloton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampedPeloton.swift; sourceTree = "<group>"; };
 		C47C1F8D268884C900372395 /* LiveDataMiner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveDataMiner.swift; sourceTree = "<group>"; };
 		C47C1F8F26888EE500372395 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		C47C1F932688A5C600372395 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -149,6 +155,9 @@
 				C47C1F932688A5C600372395 /* Team.swift */,
 				C4E23DB82687540800978B74 /* FullRider.swift */,
 				C4E23DB62687503400978B74 /* UpdateRidersData.swift */,
+				C411D874268A453200734717 /* RiderStore.swift */,
+				C411D876268AF8DA00734717 /* RaceGroup.swift */,
+				C411D878268AF8F900734717 /* TimestampedPeloton.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -355,11 +364,14 @@
 				C411D8602689EA0100734717 /* RankedRider.swift in Sources */,
 				C4E23DB72687503400978B74 /* UpdateRidersData.swift in Sources */,
 				C4E23D8B26874D4D00978B74 /* Persistence.swift in Sources */,
+				C411D877268AF8DA00734717 /* RaceGroup.swift in Sources */,
 				C47C1F8E268884C900372395 /* LiveDataMiner.swift in Sources */,
+				C411D879268AF8F900734717 /* TimestampedPeloton.swift in Sources */,
 				C47C1F9D2688CFF100372395 /* StarredRiders.swift in Sources */,
 				C411D8642689ED9800734717 /* SectionedListView.swift in Sources */,
 				C411D873268A175000734717 /* UIApplication.swift in Sources */,
 				C47C1F982688AB5500372395 /* ImageCache.swift in Sources */,
+				C411D875268A453200734717 /* RiderStore.swift in Sources */,
 				C411D8672689EE7F00734717 /* SectionedListViewModel.swift in Sources */,
 				C4E23D8226874D4C00978B74 /* LiveTrackerApp.swift in Sources */,
 				C411D86C2689EEFB00734717 /* JSONDecoder.swift in Sources */,
